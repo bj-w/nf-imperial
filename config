@@ -6,6 +6,8 @@ params {
 process {
     executor = 'pbspro'
 
+    scratch = '$TMPDIR'
+
     resourceLimits = [
         memory: 920.GB,
         cpus: 256,
@@ -24,5 +26,4 @@ process {
 singularity {
     enabled    = true
     autoMounts = true
-    runOptions = "-B /rds/,/rds/general/user/${USER}/ephemeral/tmp/:/tmp,/rds/general/user/${USER}/ephemeral/tmp/:/var/tmp"
 }
