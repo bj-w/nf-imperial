@@ -1,0 +1,28 @@
+// Imperial HPC
+params {
+  config_profile_description = 'IMPERIAL HPC'
+}
+
+process {
+    executor = 'pbspro'
+
+    resourceLimits = [
+        memory: 920.GB,
+        cpus: 256,
+        time: 72.h
+    ]
+
+    errorStrategy = 'retry'
+    maxRetries    = 2
+    maxErrors     = '-1'
+    
+    queueSize       = 45
+    submitRateLimit = '10 sec'
+    maxForks        = 45
+}
+
+singularity {
+    enabled    = true
+    autoMounts = true
+    runOptions = "-B /rds/,/rds/general/user/${USER}/ephemeral/tmp/:/tmp,/rds/general/user/${USER}/ephemeral/tmp/:/var/tmp"
+}
